@@ -1,18 +1,21 @@
 import { Router } from 'express';
+import * as productController from '@/api/v1/external/product/controller';
+import * as cartController from '@/api/v1/external/cart/controller';
 
 const router = Router();
 
 /**
- * @summary External routes configuration
- * @description Public API endpoints for LoveCakes
+ * @summary Product routes
+ * @description Public product catalog endpoints
  */
+router.get('/product', productController.listHandler);
+router.get('/product/:id', productController.getHandler);
+router.get('/product/:id/related', productController.relatedHandler);
 
 /**
- * @summary Public routes placeholder
- * @description Add public routes here (e.g., product catalog, public information)
+ * @summary Cart routes
+ * @description Shopping cart endpoints
  */
-router.use('/public', (req, res) => {
-  res.json({ message: 'Public routes endpoint' });
-});
+router.post('/cart/item', cartController.addItemHandler);
 
 export default router;
